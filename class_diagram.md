@@ -4,17 +4,19 @@ classDiagram
         -uint32 id
         -int season
         -int episode
-        +Id(string id) Id
+        +Id(string id)
         +tostring() string
         operator==()
     }
     class Genre{
-        <<enum>>
+        +Genre(string genre)
         +tostring() string
-        operator>>()
+        operator==()
     }
     class Rating{
         -float value
+        +Rating()
+        +getRating()
         +rate(int rating)
     }
     class Video {
