@@ -1,21 +1,29 @@
 # Final proyect for OOP Introduction Course
 
-Streaming service modeled via Object Oriented Programming.
+Movie and series ranking platform modeled via Object Oriented Programming.
 
 ## Compilation
 
-Using g++ compiler (version 13). Commands to compile:
+Using g++ compiler (version 13 or greater), commands to compile:
 
 * Windows
 
-`g++ classes/*.cpp -o main main.cpp`
+```
+cd src
+g++ classes/*.cpp -o main main.cpp
+```
 
 * Linux
 
-`g++-13 classes/*.cpp -o main main.cpp`
+```
+cd src
+g++-13 classes/*.cpp -o main main.cpp
+```
 
 ## UML Diagram compilation
 
+The [UML class diagram](class_diagram.md) provides a visual representation of the classes in the project, following UMl standards.
+
 Using [Mermeid CLI](https://github.com/mermaid-js/mermaid-cli) the UML class diagram can be compiled with:
 
-`mmdc -i class_diagram.md -o uml_diagram.png -t dark -b transparent`
+`mmdc -i class_diagram.md -o uml.png -t dark -b transparent`
