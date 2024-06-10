@@ -17,8 +17,8 @@ class Video{
     public:
         Video(Id id, std::string name, int duration, Genre genre);
 
-        const Genre& getGenre() const;
         Rating& getRating();
+        const Genre& getGenre() const;
         bool hasId(const Id& id) const;
         std::string ratingFormat() const;
         std::string genreFormat() const;

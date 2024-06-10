@@ -5,13 +5,9 @@
 Video::Video(Id id, std::string name, int duration, Genre genre) :
     id(id), name(name), genre(genre), duration(duration), rating(Rating()) {}
 
-const Genre& Video::getGenre() const{
-    return genre;
-}
+Rating& Video::getRating(){ return rating; }
 
-Rating& Video::getRating(){
-    return rating;
-}
+const Genre& Video::getGenre() const{ return genre; }
 
 bool Video::hasId(const Id& id) const{
     return this->id == id;

@@ -7,12 +7,15 @@ const int Id::idLength = 8;
 const int Id::seasonLength = 2;
 const int Id::episodeLength = 2;
 
+
 Id::Id(std::string id) {
+    constexpr int episodeIdLength = Id::idLength+Id::seasonLength+Id::episodeLength+3;
+
     if (id.length() == Id::idLength){
         this->id = std::stoi(id.substr(0, Id::idLength));
         this->season = 0;
         this->episode = 0;
-    }else if (id.length() == Id::idLength+Id::seasonLength+Id::episodeLength+3){
+    }else if (id.length() == episodeIdLength){
         int p = 0;
         this->id = std::stoi(id.substr(p, Id::idLength));
         p += Id::idLength+2;

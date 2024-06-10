@@ -28,6 +28,7 @@ void commandLoop(VideoRater& videoRater){
             std::cout << std::endl << commands << std::endl << "Ingresar opcion: ";
             int cmdBuff = getInput<int>(std::cin, "Entero invalido", '\n');
             COMMAND option = static_cast<COMMAND>(cmdBuff);
+
             std::cout << std::endl;
 
             switch (option)
@@ -40,17 +41,21 @@ void commandLoop(VideoRater& videoRater){
             case COMMAND::RATE_MOVIE:{
                 std::cout << "Ingresar id: ";
                 Id id = getInput<Id>(std::cin, "Id invalido", '\n');
+
                 std::cout << "Ingresar calificacion: ";
                 int rating = getInput<int>(std::cin, "Entero invalido", '\n');
+
                 videoRater[id].getRating().rate(rating);
             }
                 break;
             case COMMAND::FILTER_MIN_RATING:{
                 std::cout << "Ingresar calificacion minima: ";
                 float rating = getInput<float>(std::cin, "Numero invalido", '\n');
+
                 std::cout << "Ingresar tipo de video a filtrar:"
                           << "\nPelicula (1)\nEpisodio (2)\nAmbos (3)\n";
                 int videoTypes = getInput<int>(std::cin, "Entero invalido", '\n');
+
                 for (Video* vid : videoRater.getByRate(rating, videoTypes))
                     std::cout << vid->ratingFormat() << std::endl;
             }
@@ -58,11 +63,13 @@ void commandLoop(VideoRater& videoRater){
             case COMMAND::FILTER_GENRE:{
                 std::cout << "Ingresar genero: ";
                 Genre genre = getInput<Genre>(std::cin, "Genero invalido", '\n');
+
                 std::cout << "Ingresar tipo de video a filtrar:"
                           << "\nPelicula (1)\nEpisodio (2)\nAmbos (3)\n";
                 int videoTypes = getInput<int>(std::cin, "Entero invalido", '\n');
+
                 for (Video* vid : videoRater.getByGenre(genre, videoTypes))
-                    std::cout << vid->ratingFormat() << std::endl;
+                    std::cout << vid->genreFormat() << std::endl;
             }
                 break;
             case COMMAND::EXIT:

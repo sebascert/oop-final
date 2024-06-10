@@ -2,9 +2,6 @@
 
 #include <string>
 #include <sstream>
-#include <unordered_map>
-#include <typeindex>
-#include <type_traits>
 
 /// @brief Tries to parse user input into generic object
 /// @tparam T Generic type, either with stream extraction operator overload

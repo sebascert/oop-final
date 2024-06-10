@@ -11,7 +11,7 @@ g++ classes/*.cpp -o main main.cpp && ./main
 
 int main(){
     std::cout << "Ingresar la direccion del archivo con las peliculas: ";
-    std::string videosPath = getInput<std::string>(std::cin, "Error en string", '\n');
+    std::string videosPath = getInput<std::string>(std::cin, "", '\n');
 
     std::ifstream videosFile(videosPath);
     if (!videosFile.is_open()){

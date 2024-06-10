@@ -16,7 +16,8 @@ VideoRater::VideoRater(std::istream& input){
             Id id = getInput<Id>(input, "Id invalido", ',');
             std::string name = getInput<std::string>(input, "", ',');
             int duration = getInput<int>(input, "Duracion invalida", ',');;
-            // First reads genres value, registers it to valid and then pass it to Video
+
+            // First reads genres value, registers it to valid genres and then pass it to Video
             if (videoType == 'p'){
                 std::string str_genre = getInput<std::string>(input, "Genero invalido", '\n');;
                 Genre::registerValidGenre(str_genre);
@@ -52,21 +53,17 @@ std::vector<Video*> VideoRater::getVideosBy(std::function<bool(Video*)> predicat
 }
 
 bool VideoRater::videoTypeChecker(int videoTypes, Video* video){
-    bool validType;
     if (videoTypes == 1)
-        validType = dynamic_cast<Movie*>(video) != nullptr;
+        return dynamic_cast<Movie*>(video) != nullptr;
     else if (videoTypes == 2)
-        validType = dynamic_cast<Episode*>(video) != nullptr;
+        return dynamic_cast<Episode*>(video) != nullptr;
     else if (videoTypes == 3)
-        validType = true;
+        return true;
     else
         throw std::invalid_argument("Tipo de videos " + std::to_string(videoTypes) + " invalido");
-    return validType;
 }
 
-std::vector<Video*> VideoRater::getCatalog() const{
-    return videos;
-}
+std::vector<Video*> VideoRater::getCatalog() const{ return videos; }
 
 std::vector<Video*> VideoRater::getByRate(float minRate, int videoTypes) const{
     if (!Rating::validRate(minRate))

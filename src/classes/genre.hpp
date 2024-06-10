@@ -7,7 +7,6 @@ class Genre{
     std::string value;
     static std::unordered_set<std::string> validGenres;
 
-
     public:
         Genre(std::string genre);
 
