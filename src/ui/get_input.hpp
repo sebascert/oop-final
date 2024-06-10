@@ -6,32 +6,23 @@
 #include <typeindex>
 #include <type_traits>
 
-#include "../classes/id.hpp"
-#include "../classes/genre.hpp"
-
-std::unordered_map<std::type_index, std::string> typeNames = {
-    {typeid(int), "Entero"},
-    {typeid(float), "Flotante"},
-    {typeid(double), "Flotante Doble"},
-    {typeid(Id), "Video id"},
-    {typeid(Genre), "Video Genero"},
-};
-
 /// @brief Tries to parse user input into generic object
-/// @tparam T Generic type, either with with stream extraction operator or contructor from string
-/// @param message 
-/// @param delim 
-/// @return Built object from input, or throws of invalid argument if failed
+/// @tparam T Generic type, either with stream extraction operator overload
+/// or contructor with string arg
+/// @param is
+/// @param errMsg
+/// @param delim
+/// @return Built object from input, if failed to read format throws invalid_argument
 template<typename T>
-T getInput(char delim){
+T getInput(std::istream& is, std::string errMsg, char delim){
     std::string buff;
-    std::getline(std::cin, buff, delim);
+    std::getline(is, buff, delim);
 
     if constexpr (std::is_default_constructible<T>::value){
         std::istringstream buffss(buff);
         T value;
         if (!(buffss >> value) || buffss.peek() != EOF)
-            throw std::invalid_argument(typeNames[typeid(T)] + " Invalido");
+            throw std::invalid_argument(errMsg);
         return value;
     }else
         return T(buff);

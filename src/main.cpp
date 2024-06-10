@@ -6,13 +6,12 @@
 
 /*
 Execute cmd
-g++ classes/*.cpp ui/*.cpp -o main main.cpp && ./main
+g++ classes/*.cpp -o main main.cpp && ./main
 */
 
 int main(){
-    std::string videosPath;
     std::cout << "Ingresar la direccion del archivo con las peliculas: ";
-    std::getline(std::cin, videosPath);
+    std::string videosPath = getInput<std::string>(std::cin, "Error en string", '\n');
 
     std::ifstream videosFile(videosPath);
     if (!videosFile.is_open()){
