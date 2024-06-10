@@ -1,55 +1,73 @@
 ```mermaid
 classDiagram
     class Id{
+        -static int idLength
+        -static int seasonLength
+        -static int episodeLength
         -uint32 id
-        -int season
-        -int episode
+        -uint8 season
+        -uint8 episode
         +Id(string id)
-        +tostring() string
-        operator==()
+        +getSeason() int
+        +getEpisode() int
+        +toString() string
+        operator==(Id)
     }
     class Genre{
+        -string value
+        -static set~string~ validGenres
         +Genre(string genre)
-        +tostring() string
-        operator==()
+        +toString() string
+        +static registerValidGenre(string genre)
+        operator==(Genre)
     }
     class Rating{
+        -int count
         -float value
         +Rating()
-        +getRating()
         +rate(int rating)
+        +toString() string
+        static validRate(float rate) bool
+        operator>=(float)
     }
     class Video {
         <<interface>>
-        -Id id
-        -string name
-        -Genre genre
-        +const Rating rating
-        +Video(Id id, string name, Genre genre)
-        +tostring()* string
+        #Id id
+        #string name
+        #int duration
+        #Genre genre
+        #Rating rating
+        +Video(Id id, string name, int duration, Genre genre)
+        +getRating() Rating
+        +getGenre() Genre
+        +hasId(Id id) bool
+        +ratingFormat() string
+        +genreFormat() string
+        +virtual toString() string
         operator<<()
     }
     class Movie{
-        +tostring() string
+        +toString() string
     }
     class Episode {
         -string title
-        -int season
-        +Episode(string title, int season)
-        +tostring() string
+        +Episode(string title)
+        +toString() string
     }
     class VideoRater{
-        -vector~Video~ videos
-        +VideoRater(istringstream input)
-        -getVideosBy(bool (*predicate)(Video)) vector~Video~
-        +getCatalog()
-        +getByRate(int videoTypes)
-        +getByGenre(int videoTypes)
-        operator[]()
+        -dynamicArr~Video~ videos
+        +VideoRater(inputstream input)
+        ~VideoRater()
+        -getVideosBy(predicate~Video~ predicate) dynamicArr~Video~
+        -static videoTypeChecker(int videoTypes, Video video) bool
+        +getCatalog() dynamicArr~Video~
+        +getByRate(float minRate, int videoTypes) dynamicArr~Video~
+        +getByGenre(Genre genre, int videoTypes) dynamicArr~Video~
+        operator[](Id)
     }
 
-    Video *-- Id
-    Video *-- Genre
+    Video o-- Id
+    Video o-- Genre
     Video *-- Rating
     Video <|-- Movie
     Video <|-- Episode
