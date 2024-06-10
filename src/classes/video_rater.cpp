@@ -1,6 +1,7 @@
-#include "video_rater.hpp"
-
 #include <algorithm>
+#include <stdexcept>
+
+#include "video_rater.hpp"
 
 VideoRater::VideoRater(std::istringstream input){
     //TODO
@@ -33,7 +34,10 @@ std::vector<Video*> VideoRater::getByGenre(const Genre& genre, int videoTypes) c
     });
 }
 
-Video* VideoRater::operator[](const Id& id){
+Video& VideoRater::operator[](const Id& id){
     auto found = std::find_if(videos.begin(), videos.end(), [id](Video* v){return v->hasId(id);});
-    return found != videos.end() ? *found : nullptr;
+    if (found != videos.end())
+        return **found;
+    else
+        throw std::invalid_argument("Video con Id " + id.toString() + " no encontrado");
 }

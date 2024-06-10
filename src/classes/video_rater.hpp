@@ -18,5 +18,5 @@ class VideoRater{
         std::vector<Video*> getCatalog() const;
         std::vector<Video*> getByRate(float minRate, int videoTypes) const;
         std::vector<Video*> getByGenre(const Genre& genre, int videoTypes) const;
-        Video* operator[](const Id& id);
+        Video& operator[](const Id& id);
 };

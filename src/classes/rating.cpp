@@ -1,7 +1,7 @@
-#include "rating.hpp"
-
 #include <sstream>
 #include <iomanip>
+
+#include "rating.hpp"
 
 Rating::Rating() : count(0), value(0) {}
 
@@ -16,7 +16,7 @@ std::string Rating::toString() const{
 
 void Rating::rate(int rate){
     if (rate < 1 || rate > 5)
-        throw std::invalid_argument("Genero Invalido");
+        throw std::invalid_argument("Calificacion invalida");
 
     count++;
     value = value*(1-(1.0/count)) + (((float)rate)/count);
