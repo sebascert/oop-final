@@ -1,7 +1,10 @@
+#include <string>
 #include <algorithm>
 #include <stdexcept>
 
 #include "video_rater.hpp"
+#include "movie.hpp"
+#include "episode.hpp"
 
 VideoRater::VideoRater(std::istringstream input){
     //TODO
@@ -18,19 +21,32 @@ std::vector<Video*> VideoRater::getVideosBy(std::function<bool(Video*)> predicat
     return foundVideos;
 }
 
+bool VideoRater::videoTypeChecker(int videoTypes, Video* v){
+    bool validType;
+    if (videoTypes == 1)
+        validType = dynamic_cast<Movie*>(v) != nullptr;
+    else if (videoTypes == 2)
+        validType = dynamic_cast<Episode*>(v) != nullptr;
+    else if (videoTypes == 2)
+        validType = true;
+    else
+        throw std::invalid_argument("Tipo de videos " + std::to_string(videoTypes) + " invalido");
+    return validType;
+}
+
 std::vector<Video*> VideoRater::getCatalog() const{
     return videos;
 }
 
 std::vector<Video*> VideoRater::getByRate(float minRate, int videoTypes) const{
-    return getVideosBy([minRate](Video* v) {
-        return v->getRating()>=minRate;
+    return getVideosBy([minRate, videoTypes](Video* v) {
+        return v->getRating()>=minRate && VideoRater::videoTypeChecker(videoTypes, v);
     });
 }
 
 std::vector<Video*> VideoRater::getByGenre(const Genre& genre, int videoTypes) const{
-    return getVideosBy([genre](Video* v) {
-        return v->getGenre() == genre;
+    return getVideosBy([genre, videoTypes](Video* v) {
+        return v->getGenre() == genre && VideoRater::videoTypeChecker(videoTypes, v);
     });
 }
 

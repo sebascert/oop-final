@@ -9,7 +9,7 @@ const Genre& Video::getGenre() const{
     return genre;
 }
 
-const Rating& Video::getRating() const{
+Rating& Video::getRating(){
     return rating;
 }
 
