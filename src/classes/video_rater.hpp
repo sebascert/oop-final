@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <sstream>
+#include <ios>
 #include <functional>
 
 #include "video.hpp"
@@ -13,7 +13,7 @@ class VideoRater{
     static bool videoTypeChecker(int videoTypes, Video* v);
 
     public:
-        VideoRater(std::istringstream input);
+        VideoRater(std::istream& input);
         ~VideoRater();
 
         std::vector<Video*> getCatalog() const;
