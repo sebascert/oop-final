@@ -21,3 +21,7 @@ void Rating::rate(int rate){
     count++;
     value = value*(1-(1.0/count)) + (((float)rate)/count);
 }
+
+bool Rating::operator>=(float other) const{
+    return value >= other;
+}

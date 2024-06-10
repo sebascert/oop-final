@@ -11,4 +11,5 @@ class Rating{
 
         std::string toString() const;
         void rate(int rate);
+        bool operator>=(float other) const;
 };
