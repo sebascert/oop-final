@@ -14,7 +14,7 @@ enum class COMMAND{
     EXIT=9,
 };
 
-const std::string options =
+const std::string commands =
 "1 Mostrar todo el catalogo con calificaciones.\n\
 2 Calificar un video.\n\
 3 Mostrar peliculas o capitulos con una calificacion minima determinada.\n\
@@ -25,9 +25,10 @@ void commandLoop(VideoRater& videoRater){
     bool loop = true;
     while(loop){
         try{
-            std::cout << std::endl;
-            int cmdBuff = getInput<int>(options, '\n');
+            std::cout << std::endl << commands << std::endl << "Ingresar opcion: ";
+            int cmdBuff = getInput<int>('\n');
             COMMAND option = static_cast<COMMAND>(cmdBuff);
+            std::cout << std::endl;
 
             switch (option)
             {
@@ -37,16 +38,31 @@ void commandLoop(VideoRater& videoRater){
             }
                 break;
             case COMMAND::RATE_MOVIE:{
-                
+                std::cout << "Ingresar id: ";
+                Id id = getInput<Id>('\n');
+                std::cout << "Ingresar calificacion: ";
+                int rating = getInput<int>('\n');
+                videoRater[id].getRating().rate(rating);
             }
                 break;
             case COMMAND::FILTER_MIN_RATING:{
-                
+                std::cout << "Ingresar calificacion minima: ";
+                float rating = getInput<float>('\n');
+                std::cout << "Ingresar tipo de video a filtrar:"
+                          << "\nPelicula (1)\nEpisodio (2)\nAmbos (3)\n";
+                float videoTypes = getInput<int>('\n');
+                for (Video* vid : videoRater.getByRate(rating, videoTypes))
+                    std::cout << vid->ratingFormat() << std::endl;
             }
                 break;
             case COMMAND::FILTER_GENRE:{
-                // for (Video* vid : videoRater.getByGenre())
-                //     std::cout << vid->genreFormat() << std::endl;
+                std::cout << "Ingresar genero: ";
+                Genre genre = getInput<Genre>('\n');
+                std::cout << "Ingresar tipo de video a filtrar:"
+                          << "\nPelicula (1)\nEpisodio (2)\nAmbos (3)\n";
+                float videoTypes = getInput<int>('\n');
+                for (Video* vid : videoRater.getByGenre(genre, videoTypes))
+                    std::cout << vid->ratingFormat() << std::endl;
             }
                 break;
             case COMMAND::EXIT:

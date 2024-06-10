@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 #include <sstream>
 #include <unordered_map>
@@ -24,9 +23,7 @@ std::unordered_map<std::type_index, std::string> typeNames = {
 /// @param delim 
 /// @return Built object from input, or throws of invalid argument if failed
 template<typename T>
-T getInput(std::string message, char delim){
-    std::cout << message << std::endl;
-
+T getInput(char delim){
     std::string buff;
     std::getline(std::cin, buff, delim);
 
