@@ -5,7 +5,7 @@
 
 Rating::Rating() : count(0), value(0) {}
 
-std::string Rating::toString() {
+std::string Rating::toString() const{
     if (count == 0)
         return "SC";
 
@@ -13,6 +13,7 @@ std::string Rating::toString() {
     ss << std::fixed << std::setprecision(1) << value;
     return ss.str();
 }
+
 void Rating::rate(int rate){
     if (rate < 1 || rate > 5)
         throw std::invalid_argument("Genero Invalido");

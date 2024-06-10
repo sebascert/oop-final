@@ -9,6 +9,6 @@ class Rating{
     public:
         Rating();
 
-        std::string toString();
+        std::string toString() const;
         void rate(int rate);
 };
