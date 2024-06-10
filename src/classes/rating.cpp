@@ -23,5 +23,5 @@ void Rating::rate(int rate){
 }
 
 bool Rating::operator>=(float other) const{
-    return value >= other;
+    return count > 0 && value >= other;
 }
