@@ -1,3 +1,4 @@
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <algorithm>
@@ -15,25 +16,24 @@ VideoRater::VideoRater(std::istream& input){
             Id id = getInput<Id>(input, "Id invalido", ',');
             std::string name = getInput<std::string>(input, "Error en string", ',');
             int duration = getInput<int>(input, "Duracion invalida", ',');;
-            if (videoType == 'c'){
+            if (videoType == 'p'){
+                Genre genre = getInput<Genre>(input, "Genero invalido", '\n');;
+                videos.emplace_back(new Movie(id, name, duration, genre));
+            }else if (videoType == 'c'){
                 Genre genre = getInput<Genre>(input, "Genero invalido", ',');;
                 std::string title = getInput<std::string>(input, "Error en string", ',');
                 int episode = getInput<int>(input, "Episodio invalido", '\n');
                 videos.emplace_back(new Episode(id, name, duration, genre, title));
                 continue;
-            }else if (videoType == 'p'){
-                Genre genre = getInput<Genre>(input, "Genero invalido", '\n');;
-                videos.emplace_back(new Movie(id, name, duration, genre));
             }else
                 throw std::invalid_argument("");
             line++;
         }
     }catch (std::invalid_argument& e){
-        std::stringstream ss("");
-        ss << "Datos de video invalido, linea:";
+        std::cout << "Datos de video invalido, linea:" << line;
         if (e.what() != "")
-            ss << "\nError: " << e.what();
-        throw std::invalid_argument(ss.str());
+            std::cout << "\nError: " << e.what();
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -48,13 +48,13 @@ std::vector<Video*> VideoRater::getVideosBy(std::function<bool(Video*)> predicat
     return foundVideos;
 }
 
-bool VideoRater::videoTypeChecker(int videoTypes, Video* v){
+bool VideoRater::videoTypeChecker(int videoTypes, Video* video){
     bool validType;
     if (videoTypes == 1)
-        validType = dynamic_cast<Movie*>(v) != nullptr;
+        validType = dynamic_cast<Movie*>(video) != nullptr;
     else if (videoTypes == 2)
-        validType = dynamic_cast<Episode*>(v) != nullptr;
-    else if (videoTypes == 2)
+        validType = dynamic_cast<Episode*>(video) != nullptr;
+    else if (videoTypes == 3)
         validType = true;
     else
         throw std::invalid_argument("Tipo de videos " + std::to_string(videoTypes) + " invalido");

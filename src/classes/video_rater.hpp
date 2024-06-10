@@ -9,8 +9,8 @@
 class VideoRater{
     std::vector<Video*> videos;
 
+    static bool videoTypeChecker(int videoTypes, Video* video);
     std::vector<Video*> getVideosBy(std::function<bool(Video*)> predicate) const;
-    static bool videoTypeChecker(int videoTypes, Video* v);
 
     public:
         VideoRater(std::istream& input);

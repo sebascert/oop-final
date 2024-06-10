@@ -18,6 +18,9 @@ T getInput(std::istream& is, std::string errMsg, char delim){
     std::string buff;
     std::getline(is, buff, delim);
 
+    if constexpr (std::is_same<T, std::string>::value)
+        return buff;
+
     if constexpr (std::is_default_constructible<T>::value){
         std::istringstream buffss(buff);
         T value;

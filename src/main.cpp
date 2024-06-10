@@ -15,8 +15,8 @@ int main(){
 
     std::ifstream videosFile(videosPath);
     if (!videosFile.is_open()){
-            std::cout << std::endl << "No se pudo abrir el archivo" << std::endl;
-            exit(EXIT_FAILURE);
+        std::cout << std::endl << "No se pudo abrir el archivo" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
     VideoRater videoRater(videosFile);
