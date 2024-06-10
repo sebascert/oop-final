@@ -23,6 +23,10 @@ Id::Id(std::string id) {
         throw std::invalid_argument("Id invalida");
 }
 
+int Id::getSeason() const{ return season; }
+
+int Id::getEpisode() const{ return episode; }
+
 std::string Id::toString() const{
     std::stringstream ss;
     ss << std::setw(Id::idLength) << std::setfill('0') << id;

@@ -15,6 +15,8 @@ class Id{
     public:
         Id(std::string id);
 
+        int getSeason() const;
+        int getEpisode() const;
         std::string toString() const;
         bool operator==(const Id& other) const;
 };
