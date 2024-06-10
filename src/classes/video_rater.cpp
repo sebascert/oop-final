@@ -14,16 +14,19 @@ VideoRater::VideoRater(std::istream& input){
         while (input.peek() != EOF){
             char videoType = getInput<char>(input, "Tipo de video invalido", ',');
             Id id = getInput<Id>(input, "Id invalido", ',');
-            std::string name = getInput<std::string>(input, "Error en string", ',');
+            std::string name = getInput<std::string>(input, "", ',');
             int duration = getInput<int>(input, "Duracion invalida", ',');;
+            // First reads genres value, registers it to valid and then pass it to Video
             if (videoType == 'p'){
-                Genre genre = getInput<Genre>(input, "Genero invalido", '\n');;
-                videos.emplace_back(new Movie(id, name, duration, genre));
+                std::string str_genre = getInput<std::string>(input, "Genero invalido", '\n');;
+                Genre::registerValidGenre(str_genre);
+                videos.emplace_back(new Movie(id, name, duration, Genre(str_genre)));
             }else if (videoType == 'c'){
-                Genre genre = getInput<Genre>(input, "Genero invalido", ',');;
-                std::string title = getInput<std::string>(input, "Error en string", ',');
+                std::string str_genre = getInput<std::string>(input, "Genero invalido", ',');;
+                Genre::registerValidGenre(str_genre);
+                std::string title = getInput<std::string>(input, "", ',');
                 int episode = getInput<int>(input, "Episodio invalido", '\n');
-                videos.emplace_back(new Episode(id, name, duration, genre, title));
+                videos.emplace_back(new Episode(id, name, duration, Genre(str_genre), title));
                 continue;
             }else
                 throw std::invalid_argument("");
