@@ -8,6 +8,6 @@ class Genre{
     public:
         Genre(std::string genre);
 
-        std::string toString();
+        std::string toString() const;
         bool operator==(Genre& other) const;
 };
