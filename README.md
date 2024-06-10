@@ -20,10 +20,16 @@ cd src
 g++-13 classes/*.cpp -o main main.cpp
 ```
 
-## UML Diagram compilation
+## UML Diagrams compilation
 
 The [UML class diagram](class_diagram.md) provides a visual representation of the classes in the project, following UMl standards.
 
-Using [Mermeid CLI](https://github.com/mermaid-js/mermaid-cli) the UML class diagram can be compiled with:
+The [UML sequence diagram](sequence_diagram.md) provides a visual representation of the sequence of events in the project execution.
 
-`mmdc -i class_diagram.md -o uml.png -t dark -b transparent`
+Using [Mermeid CLI](https://github.com/mermaid-js/mermaid-cli) the UML diagrams can be compiled with:
+
+#### Class Diagram
+`mmdc -i class_diagram.md -o class_uml.png -t dark -b transparent`
+
+#### Sequence Diagram
+`mmdc -i sequence_diagram.md -o sequence_uml.png -t dark -b transparent`
