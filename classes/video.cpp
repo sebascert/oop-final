@@ -11,11 +11,11 @@ const Rating& Video::getRating() const{
     return rating;
 }
 
-bool Video::hasId(Id id) const{
+bool Video::hasId(const Id& id) const{
     return this->id == id;
 }
 
 std::ostream& operator<<(std::ostream& os, const Video& obj){
-    os << obj.tostring();
+    os << obj.toString();
     return os;
 }

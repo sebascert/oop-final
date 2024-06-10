@@ -6,5 +6,5 @@ class Movie : public Video{
     using Video::Video;
 
     public:
-        std::string tostring() const override;
+        std::string toString() const override;
 };

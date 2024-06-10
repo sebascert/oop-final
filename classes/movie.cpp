@@ -2,7 +2,7 @@
 
 #include "movie.hpp"
 
-std::string Movie::tostring() const{
+std::string Movie::toString() const{
     std::stringstream ss("");
     ss << "Id:" << id.toString()
        << " Nombre:" << name

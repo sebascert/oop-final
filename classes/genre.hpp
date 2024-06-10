@@ -9,5 +9,5 @@ class Genre{
         Genre(std::string genre);
 
         std::string toString() const;
-        bool operator==(Genre& other) const;
+        bool operator==(const Genre& other) const;
 };

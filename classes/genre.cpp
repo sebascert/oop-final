@@ -14,6 +14,6 @@ std::string Genre::toString() const{
     return value;
 }
 
-bool Genre::operator==(Genre& other) const{
+bool Genre::operator==(const Genre& other) const{
     return value == other.value;
 }

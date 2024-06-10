@@ -7,7 +7,6 @@ const int Id::idLength = 8;
 const int Id::seasonLength = 2;
 const int Id::episodeLength = 2;
 
-
 Id::Id(std::string id) {
     if (id.length() == Id::idLength){
         this->id = std::stoi(id.substr(0, Id::idLength));
