@@ -9,6 +9,7 @@ class Rating{
     public:
         Rating();
 
+        static bool validRate(float rate);
         void rate(int rate);
         std::string toString() const;
         bool operator>=(float other) const;

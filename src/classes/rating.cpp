@@ -14,8 +14,12 @@ std::string Rating::toString() const{
     return ss.str();
 }
 
+bool Rating::validRate(float rate){
+    return rate >= 1.0 && rate <= 5.0;
+}
+
 void Rating::rate(int rate){
-    if (rate < 1 || rate > 5)
+    if (!validRate(rate))
         throw std::invalid_argument("Calificacion invalida");
 
     count++;
