@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "video.hpp"
 
 Video::Video(Id id, std::string name, int duration, Genre genre) :
@@ -13,6 +15,23 @@ const Rating& Video::getRating() const{
 
 bool Video::hasId(const Id& id) const{
     return this->id == id;
+}
+
+std::string Video::ratingFormat() const{
+    std::stringstream ss("");
+    ss << "Id:" << id.toString()
+       << " Nombre:" << name
+       << " Calificacion:" << rating.toString();
+    return ss.str();
+}
+
+std::string Video::genreFormat() const{
+    std::stringstream ss("");
+    ss << "Id:" << id.toString()
+       << " Nombre:" << name
+       << " Genero:" << genre.toString()
+       << " Calificacion:" << rating.toString();
+    return ss.str();
 }
 
 std::ostream& operator<<(std::ostream& os, const Video& obj){

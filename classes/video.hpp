@@ -20,6 +20,8 @@ class Video{
         const Genre& getGenre() const;
         const Rating& getRating() const;
         bool hasId(const Id& id) const;
+        std::string ratingFormat() const;
+        std::string genreFormat() const;
         virtual std::string toString() const = 0;
         friend std::ostream& operator<<(std::ostream& os, const Video& obj);
 };
