@@ -55,14 +55,14 @@ classDiagram
         +toString() string
     }
     class VideoRater{
-        -dynamicArr~Video~ videos
+        -vector~Video~ videos
         +VideoRater(inputstream input)
         ~VideoRater()
-        -getVideosBy(predicate~Video~ predicate) dynamicArr~Video~
+        -getVideosBy(predicate~Video~ predicate) coo~Video~
         -static videoTypeChecker(int videoTypes, Video video) bool
-        +getCatalog() dynamicArr~Video~
-        +getByRate(float minRate, int videoTypes) dynamicArr~Video~
-        +getByGenre(Genre genre, int videoTypes) dynamicArr~Video~
+        +getCatalog() vector~Video~
+        +getByRate(float minRate, int videoTypes) vector~Video~
+        +getByGenre(Genre genre, int videoTypes) vector~Video~
         operator[](Id)
     }
 
