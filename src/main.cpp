@@ -10,8 +10,8 @@ g++ classes/*.cpp -o main main.cpp && ./main
 */
 
 int main(){
-    std::cout << "Ingresar la direccion del archivo con las peliculas: ";
-    std::string videosPath = getInput<std::string>(std::cin, "", '\n');
+    std::string videosPath = "videos.txt";
+    std::cout << "Se asume que el archivo de videos se llama: " + videosPath << std::endl;
 
     std::ifstream videosFile(videosPath);
     if (!videosFile.is_open()){

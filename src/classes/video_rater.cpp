@@ -66,9 +66,6 @@ bool VideoRater::videoTypeChecker(int videoTypes, Video* video){
 std::vector<Video*> VideoRater::getCatalog() const{ return videos; }
 
 std::vector<Video*> VideoRater::getByRate(float minRate, int videoTypes) const{
-    if (!Rating::validRate(minRate))
-        throw std::invalid_argument("Calificacion invalida");
-
     return getVideosBy([minRate, videoTypes](Video* v) {
         return v->getRating()>=minRate && VideoRater::videoTypeChecker(videoTypes, v);
     });

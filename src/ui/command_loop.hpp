@@ -26,7 +26,7 @@ void commandLoop(VideoRater& videoRater){
     while(loop){
         try{
             std::cout << std::endl << commands << std::endl << "Ingresar opcion: ";
-            int cmdBuff = getInput<int>(std::cin, "Entero invalido", '\n');
+            int cmdBuff = getInput<int>(std::cin, "opcion Invalida", '\n');
             COMMAND option = static_cast<COMMAND>(cmdBuff);
 
             std::cout << std::endl;
@@ -50,13 +50,16 @@ void commandLoop(VideoRater& videoRater){
                 break;
             case COMMAND::FILTER_MIN_RATING:{
                 std::cout << "Ingresar calificacion minima: ";
-                float rating = getInput<float>(std::cin, "Numero invalido", '\n');
+                float minRating = getInput<float>(std::cin, "Numero invalido", '\n');
+
+                if (!Rating::validRate(minRating))
+                    throw std::invalid_argument("Calificacion invalida");
 
                 std::cout << "Ingresar tipo de video a filtrar:"
                           << "\nPelicula (1)\nEpisodio (2)\nAmbos (3)\n";
                 int videoTypes = getInput<int>(std::cin, "Entero invalido", '\n');
 
-                for (Video* vid : videoRater.getByRate(rating, videoTypes))
+                for (Video* vid : videoRater.getByRate(minRating, videoTypes))
                     std::cout << vid->ratingFormat() << std::endl;
             }
                 break;
